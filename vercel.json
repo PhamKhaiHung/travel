@@ -1,0 +1,14 @@
+{
+  "buildCommand": "cd Fe && npm install && npm run build",
+  "outputDirectory": "Fe/dist",
+  "devCommand": "cd Fe && npm run dev",
+  "installCommand": "cd Fe && npm install",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+
