@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: food-app-backend
+    env: java
+    buildCommand: mvn clean install -DskipTests
+    startCommand: java -jar target/food-app-1.0.0.jar
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: JAVA_OPTS
+        value: -Xmx512m -Xms256m
+
+

@@ -1,0 +1,26 @@
+{
+  "name": "food-app-frontend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Frontend cho ứng dụng quản lý địa điểm đi chơi",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5",
+    "pinia": "^2.1.7",
+    "axios": "^1.6.2",
+    "vuetify": "^3.5.0",
+    "@mdi/font": "^7.4.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.0",
+    "vite": "^5.0.0",
+    "vite-plugin-vuetify": "^2.0.1"
+  }
+}
+
+
