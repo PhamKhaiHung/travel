@@ -1,0 +1,14 @@
+com\food\app\repository\LocationTypeRepository.class
+com\food\app\repository\TripScheduleRepository.class
+com\food\app\service\LocationService.class
+com\food\app\controller\LocationController.class
+com\food\app\FoodAppApplication.class
+com\food\app\repository\LocationRepository.class
+com\food\app\config\CorsConfig.class
+com\food\app\model\TripSchedule.class
+com\food\app\model\Location.class
+com\food\app\service\LocationTypeService.class
+com\food\app\controller\LocationTypeController.class
+com\food\app\model\LocationType.class
+com\food\app\controller\TripScheduleController.class
+com\food\app\service\TripScheduleService.class

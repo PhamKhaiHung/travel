@@ -95,25 +95,58 @@ Frontend chạy tại: `http://localhost:3000`
 
 ## 📦 Deploy
 
-### Frontend - Vercel (Khuyến nghị)
+**Bạn có thể deploy cả FE và BE từ cùng một repository (monorepo), nhưng phải deploy riêng biệt trên các platform phù hợp.**
 
-1. Cài đặt Vercel CLI: `npm i -g vercel`
-2. Đăng nhập: `vercel login`
-3. Deploy: `vercel`
-4. Cấu hình biến môi trường `VITE_API_BASE_URL` trỏ đến backend URL
+### 🎯 Tổng quan
 
-### Backend - Render (Khuyến nghị)
+- **Frontend (FE)**: Deploy lên **Vercel** (Static Site)
+- **Backend (BE)**: Deploy lên **Render** (Web Service)
 
-1. Kết nối repository với Render
-2. Chọn "Web Service"
-3. Build command: `mvn clean install -DskipTests`
-4. Start command: `java -jar target/food-app-1.0.0.jar`
-5. Cấu hình PORT environment variable
+### Bước 1: Deploy Backend lên Render
+
+1. Truy cập [render.com](https://render.com) và đăng nhập bằng GitHub
+2. Click **"New +"** → **"Web Service"**
+3. Kết nối repository của bạn (cùng repo chứa cả FE và BE)
+4. **Cấu hình quan trọng**:
+   - **Root Directory**: `BE` ⚠️ **QUAN TRỌNG - Phải set đúng**
+   - **Environment**: `Java`
+   - **Build Command**: `mvn clean install -DskipTests`
+   - **Start Command**: `java -jar target/food-app-1.0.0.jar`
+5. Click **"Create Web Service"**
+6. **Đợi deploy xong** → Copy URL backend (ví dụ: `https://food-app-backend.onrender.com`)
+
+**Lưu ý**: File `BE/render.yaml` đã có sẵn, Render sẽ tự động detect.
+
+### Bước 2: Deploy Frontend lên Vercel
+
+1. Truy cập [vercel.com](https://vercel.com) và đăng nhập bằng GitHub
+2. Click **"Add New Project"**
+3. Import **cùng repository** với backend
+4. **Cấu hình quan trọng**:
+   - **Root Directory**: `Fe` ⚠️ **QUAN TRỌNG - Phải set đúng**
+   - **Framework Preset**: Vite (tự động detect)
+   - **Build Command**: `npm run build` (tự động)
+   - **Output Directory**: `dist` (tự động)
+5. **Thêm Environment Variable**:
+   - **Key**: `VITE_API_BASE_URL`
+   - **Value**: `https://food-app-backend.onrender.com/api` (URL từ Bước 1 + `/api`)
+6. Click **"Deploy"**
+7. **Đợi deploy xong** → Copy URL frontend
+
+### Bước 3: Cấu hình CORS (Đã có sẵn ✅)
+
+Backend đã được cấu hình CORS để cho phép tất cả origins. Nếu muốn giới hạn, sửa file `BE/src/main/java/com/food/app/config/CorsConfig.java`.
+
+### ✅ Sau khi deploy
+
+- Mỗi khi push code lên GitHub:
+  - Render tự động redeploy backend (nếu có thay đổi trong `BE/`)
+  - Vercel tự động redeploy frontend (nếu có thay đổi trong `Fe/`)
 
 **Lưu ý**: 
 - Render có free tier nhưng có giới hạn (sleep sau 15 phút không hoạt động)
 - Vercel rất tốt cho frontend, miễn phí và không có giới hạn sleep
-- Để sử dụng lâu dài, có thể cân nhắc upgrade Render hoặc dùng các dịch vụ khác như Railway, Fly.io
+- Xem hướng dẫn chi tiết trong `DEPLOY_FULL.md`
 
 ## 🎨 UI/UX
 
